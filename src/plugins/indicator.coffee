@@ -4,6 +4,7 @@
 ((jQuery) ->
   jQuery.widget 'IKS.halloindicator',
     options:
+      promptText: "Edit"
       editable: null
       className: 'halloEditIndicator'
 
@@ -14,7 +15,7 @@
     populateToolbar: ->
 
     buildIndicator: ->
-      editButton = jQuery '<div><i class="icon-edit"></i> Edit</div>'
+      editButton = jQuery "<div><i class='icon-edit'></i> #{@options.promptText}</div>"
       editButton.addClass @options.className
       do editButton.hide
 
