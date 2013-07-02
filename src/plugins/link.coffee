@@ -83,6 +83,7 @@
           queryState: false
           uuid: @options.uuid
           cssClass: @options.buttonCssClass
+        buttonHolder.find('button .ui-button-text').text('Link')
         buttonset.append buttonHolder
         button = buttonHolder
         button.on "click", (event) ->

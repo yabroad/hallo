@@ -26,6 +26,7 @@
           uuid: @options.uuid
           cssClass: @options.buttonCssClass
         buttonset.append buttonHolder
+        buttonHolder.find('button .ui-button-text').text(format)
 
       for format, enabled of @options.formattings
         continue unless enabled

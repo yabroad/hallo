@@ -24,6 +24,7 @@
           icon: "icon-list-#{label.toLowerCase()}"
           cssClass: @options.buttonCssClass
         buttonset.append buttonElement
+        buttonElement.find('button .ui-button-text').text(label.toUpperCase())
 
       buttonize "Ordered", "OL" if @options.lists.ordered
       buttonize "Unordered", "UL" if @options.lists.unordered

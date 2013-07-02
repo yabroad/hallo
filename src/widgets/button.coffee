@@ -20,7 +20,7 @@
       # By default the icon is icon-command, but this doesn't
       # always match with
       # <http://fortawesome.github.com/Font-Awesome/#base-icons>
-      @options.icon ?= "icon-#{@options.label.toLowerCase()}"
+      @options.icon = null
 
       id = "#{@options.uuid}-#{@options.label}"
       opts = @options
@@ -31,7 +31,7 @@
       @button.data 'hallo-command', @options.command
       if @options.commandValue
         @button.data 'hallo-command-value', @options.commandValue
-        
+
       hoverclass = 'ui-state-hover'
       @button.on 'mouseenter', (event) =>
         if @isEnabled()
