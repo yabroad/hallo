@@ -45,39 +45,45 @@
         return
 
       editor = this.element
-      
+
       # bind paste handler on first call
       editor.bind 'paste', this, (event) =>
-       
+
         # TODO: find out why this check always fails when placed directly
         # after jQuery.htmlClean check
         if rangy.saveSelection is undefined
           throw new Error rangyMessage
           return
-        
+
+        # store current location of the window scrollbar.
+        currentScreenLocation = jQuery(document).scrollTop();
+
         widget = event.data
         # bugfix for overwriting selected text in ie
         widget.options.editable.getSelection().deleteContents()
         lastRange = rangy.saveSelection()
-        
+
         # make sure content will be pasted _empty_ editor and save old contents
         # (because we cannot access clipboard data in all browsers)
         lastContent = editor.html()
         editor.html ''
-        
+
         setTimeout =>
-          
+
           pasted = editor.html()
           cleanPasted = jQuery.htmlClean pasted, @options
-          
+
           #console.log "content before: " + lastContent
           #console.log "pasted content: " + pasted
           #console.log "tidy pasted content: " + cleanPasted
-         
+
           # back in timne to the state before pasting
           editor.html lastContent
           rangy.restoreSelection lastRange
-          
+
+          # recover the location of the window scrollbar.
+          jQuery(document).scrollTop(currentScreenLocation);
+
           # paste tidy pasted content back
           # TODO: set cursor _behind_ pasted content
           if cleanPasted != ''
